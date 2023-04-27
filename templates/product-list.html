@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CSV Data</title>
+    <title>Etsy Data</title>
 </head>
 <body>
+{% extends "base.html" %}
+{% block content %}
     <h1>Product-list</h1>
     <table>
         <thead>
             <tr>
                 <th>Column 1</th>
-
                 <th>Column 3</th>
                 <th>Column 4</th>
                 <th>Column 5</th>
@@ -28,7 +29,6 @@
                 <th>Column 18</th>
                 <th>Column 19</th>
                 <th>Column 20</th>
-
             </tr>
         </thead>
         <tbody>
@@ -57,6 +57,7 @@
                 <td>{{ row[20] }}</td>
             </tr>
             {% endfor %}
+        {% endblock %}
         </tbody>
     </table>
 </body>
