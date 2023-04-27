@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from bs4 import BeautifulSoup
 import requests
 import csv
@@ -7,9 +7,31 @@ from flask import render_template
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    data = []
+    if request.method == 'POST':
+        url = request.form['shop_url']
+        print(url)
+        with open('etsy_urls.csv', mode='w', newline='') as output_file:
+            writer = csv.writer(output_file)
+
+            response = requests.get(url)
+            html_content = response.text
+            soup = BeautifulSoup(html_content, 'html.parser')
+            product_elements = soup.find_all("div", {"class": "v2-listing-card"})
+            for product_element in product_elements:
+                product_url = product_element.find("a", {"class": "listing-link"})['href']
+                product_title = product_element.find("h3", {"class": "text-gray text-truncate mb-xs-0 text-body"})
+                product_price = product_element.find("p",
+                                                     {"class": "text-gray-lighter text-truncate mt-xs-0 text-body"})
+                writer.writerow(
+                    [product_url, product_title, product_price])
+
+        with open('etsy_urls.csv', 'r') as file:
+            reader = csv.reader(file)
+            data = [row for row in reader]
+    return render_template('home.html', data=data)
 
 
 @app.route("/etsy")
@@ -92,7 +114,6 @@ def etsy():
                 writer.writerow(
                     [reader.line_num, product_title, Description, Price, SKU, QUANTITY, TAGS, MATERIALS, images,
                      "", option_name, optionvalues, "", option2_name, optionvalues2, listingId, Price, URL])
-
 
     with open('etsy_product_data.csv', 'r') as file:
         reader = csv.reader(file)

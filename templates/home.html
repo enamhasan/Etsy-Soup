@@ -8,8 +8,57 @@
 {% extends "base.html" %}
 {% block content %}
 
+<form method="post">
+    <label for="shop_url">Etsy Shop URL</label>
+    <input type="text" name="shop_url" id="shop_url" value="{{ request.form['shop_url'] }}">
+    <button type="submit">Submit</button>
+</form>
 
+{% if data %}
+    <h1>Product-list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product URL</th>
+                <th>Title</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+{% if data is not none %}
+<h1>Product-list with URLS</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>SL</th>
+                <th>URL</th>
+                <th>Title</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
 {% endblock %}
-
 </body>
 </html>
