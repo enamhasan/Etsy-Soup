@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Data</title>
+</head>
+<body>
+    <h1>Product-list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Column 1</th>
+
+                <th>Column 3</th>
+                <th>Column 4</th>
+                <th>Column 5</th>
+                <th>Column 6</th>
+                <th>Column 7</th>
+                <th>Column 8</th>
+                <th>Column 9</th>
+                <th>Column 10</th>
+                <th>Column 11</th>
+                <th>Column 12</th>
+                <th>Column 13</th>
+                <th>Column 14</th>
+                <th>Column 15</th>
+                <th>Column 16</th>
+                <th>Column 17</th>
+                <th>Column 18</th>
+                <th>Column 19</th>
+                <th>Column 20</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+                <td>{{ row[8] }}</td>
+                <td>{{ row[9] }}</td>
+                <td>{{ row[10] }}</td>
+                <td>{{ row[11] }}</td>
+                <td>{{ row[12] }}</td>
+                <td>{{ row[13] }}</td>
+                <td>{{ row[14] }}</td>
+                <td>{{ row[15] }}</td>
+                <td>{{ row[16] }}</td>
+                <td>{{ row[17] }}</td>
+                <td>{{ row[18] }}</td>
+                <td>{{ row[19] }}</td>
+                <td>{{ row[20] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    th, td {
+        max-width: 100px;
+    }
+    </style>
